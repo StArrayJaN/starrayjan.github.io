@@ -1,0 +1,109 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "starray.java.mono4j",
+    "module": "mono4j",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.13"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "mono4j-1.0.0.jar",
+          "url": "mono4j-1.0.0.jar",
+          "size": 7314506,
+          "sha512": "3d5b56e67c9e7fcb38809d29d5d66da6dec3699eaff86b50301ce478c79e4bbcf73b40c7226810bc57a2925400505263772e92cfb3d47bc71c2927e5827b9476",
+          "sha256": "31dcb014db17e48d6fc04ac73a5a1421f57606a0e6528e8bc6b209176a5d715e",
+          "sha1": "3f55021bc5de7f8596847565c81d578bf32eb2fa",
+          "md5": "41171a3f995b493c1964b4c49b381a12"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "net.java.dev.jna",
+          "module": "jna",
+          "version": {
+            "requires": "5.13.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "mono4j-1.0.0.jar",
+          "url": "mono4j-1.0.0.jar",
+          "size": 7314506,
+          "sha512": "3d5b56e67c9e7fcb38809d29d5d66da6dec3699eaff86b50301ce478c79e4bbcf73b40c7226810bc57a2925400505263772e92cfb3d47bc71c2927e5827b9476",
+          "sha256": "31dcb014db17e48d6fc04ac73a5a1421f57606a0e6528e8bc6b209176a5d715e",
+          "sha1": "3f55021bc5de7f8596847565c81d578bf32eb2fa",
+          "md5": "41171a3f995b493c1964b4c49b381a12"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "mono4j-1.0.0-sources.jar",
+          "url": "mono4j-1.0.0-sources.jar",
+          "size": 7276591,
+          "sha512": "588caed110938760fec5dfc475b063341fa60d5d08dfec82a161e4fac22dcf7da8c9bea45f056746a3383161c09d46cb0037e7387871f8f96bd1966b37eb8009",
+          "sha256": "603f9723dd06f5d8b4e96644a6d27757ffc405cc09125234a9e7ba6adcf690f3",
+          "sha1": "ad51e7e095697a0c61335135c1497689c63ae921",
+          "md5": "bf16605af190b777a64c307a0115c01a"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "mono4j-1.0.0-javadoc.jar",
+          "url": "mono4j-1.0.0-javadoc.jar",
+          "size": 359166,
+          "sha512": "07fc8346508c56b0c627c130e7467b9b41bb2519df20383908f3607b5b126a59298f7d283206916a64affb5a42558525e1467e54880ad4cddd358cb291686a87",
+          "sha256": "cd9afff1f1dcb4ad848b5f36f8ef8e1a33d69c21be22fe30633296c4ae4a67bd",
+          "sha1": "80d0273f23b8ae9c47f9c7c53b51efeafe915d60",
+          "md5": "3ea984cd5ea346bdaec6f5099a3b2af4"
+        }
+      ]
+    }
+  ]
+}

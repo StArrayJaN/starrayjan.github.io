@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StArray - 首页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        :root {
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005D;
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #E8DEF8;
+            --md-sys-color-surface: #FFFBFE;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-on-surface: #1C1B1F;
+            --md-sys-color-on-surface-variant: #49454F;
+            --md-sys-color-outline: #79747E;
+            --md-sys-color-outline-variant: #CAC4D0;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+            --md-sys-shape-corner-extra-large: 28px;
+        }
+
+        /* Dark mode colors */
+        :root.dark {
+            --md-sys-color-primary: #D0BCFF;
+            --md-sys-color-on-primary: #381E72;
+            --md-sys-color-primary-container: #4F378B;
+            --md-sys-color-on-primary-container: #EADDFF;
+            --md-sys-color-secondary: #CCC2DC;
+            --md-sys-color-on-secondary: #332D41;
+            --md-sys-color-secondary-container: #4A4458;
+            --md-sys-color-surface: #1C1B1F;
+            --md-sys-color-surface-variant: #49454F;
+            --md-sys-color-on-surface: #E6E1E5;
+            --md-sys-color-on-surface-variant: #CAC4D0;
+            --md-sys-color-outline: #938F99;
+            --md-sys-color-outline-variant: #49454F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 粒子背景 */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--md-sys-color-primary);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.3; }
+        }
+
+        /* 鼠标轨迹 */
+        .mouse-trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: var(--md-sys-color-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.8;
+            animation: trail-fade 0.5s ease-out forwards;
+        }
+
+        @keyframes trail-fade {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* 点击涟漪效果 */
+        .click-ripple {
+            position: fixed;
+            border: 2px solid var(--md-sys-color-primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            animation: ripple-expand 0.6s ease-out forwards;
+        }
+
+        @keyframes ripple-expand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 60px;
+                height: 60px;
+                opacity: 0;
+            }
+        }
+
+        /* Navigation Rail */
+        .nav-rail {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 100vh;
+            background: var(--md-sys-color-surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+            z-index: 100;
+            border-right: 1px solid var(--md-sys-color-outline-variant);
+        }
+
+        .nav-rail-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+            width: 100%;
+            text-decoration: none;
+            color: var(--md-sys-color-on-surface-variant);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-rail-item:hover {
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .nav-rail-item.active {
+            color: var(--md-sys-color-on-secondary-container);
+        }
+
+        .nav-rail-item .icon-container {
+            width: 56px;
+            height: 32px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+
+        .nav-rail-item:hover .icon-container {
+            background: var(--md-sys-color-surface-variant);
+        }
+
+        .nav-rail-item.active .icon-container {
+            background: var(--md-sys-color-secondary-container);
+        }
+
+        .nav-rail-item span:last-child {
+            font-size: 12px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 80px;
+            padding: 24px 32px;
+            background: var(--md-sys-color-surface);
+            flex: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-top: 0;
+            margin-bottom: 32px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .page-header p {
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 14px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: var(--md-sys-color-surface);
+            border-radius: var(--md-sys-shape-corner-large);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            padding: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--md-sys-shape-corner-medium);
+            background: var(--md-sys-color-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .card-icon .material-icons-outlined {
+            font-size: 28px;
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .card p {
+            font-size: 14px;
+            color: var(--md-sys-color-on-surface-variant);
+            line-height: 1.5;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        /* Footer */
+        footer {
+            margin-left: 80px;
+            padding: 24px 32px;
+            border-top: 1px solid var(--md-sys-color-outline-variant);
+            text-align: center;
+            color: var(--md-sys-color-on-surface-variant);
+            font-size: 14px;
+            background: var(--md-sys-color-surface);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-rail {
+                bottom: 0;
+                top: auto;
+                width: 100%;
+                height: 80px;
+                flex-direction: row;
+                justify-content: space-around;
+                border-right: none;
+                border-top: 1px solid var(--md-sys-color-outline-variant);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 16px;
+            }
+            footer {
+                margin-left: 0;
+                padding: 16px;
+                margin-bottom: 80px;
+            }
+            .page-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    
+    <nav class="nav-rail">
+        <a href="index.html" class="nav-rail-item active">
+            <div class="icon-container">
+                <span class="material-icons-outlined">home</span>
+            </div>
+            <span>首页</span>
+        </a>
+        <a href="maven.html" class="nav-rail-item">
+            <div class="icon-container">
+                <span class="material-icons-outlined">inventory_2</span>
+            </div>
+            <span>Maven</span>
+        </a>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>StArray</h1>
+            <p>个人主页 · <a href="https://space.bilibili.com/425111197" target="_blank" style="color: var(--md-sys-color-primary); text-decoration: underline;">B站主页</a></p>
+        </div>
+        <div class="cards-grid">
+            <a href="maven.html" class="card">
+                <div class="card-icon">
+                    <span class="material-icons-outlined">inventory_2</span>
+                </div>
+                <h3>Maven 仓库</h3>
+                <p>浏览和下载 Maven 依赖包，支持多种构建工具集成，快速引入项目依赖。</p>
+            </a>
+
+            <a href="javadoc/mono4j/index.html" class="card">
+                <div class="card-icon">
+                    <span class="material-icons-outlined">description</span>
+                </div>
+                <h3>API 文档</h3>
+                <p>详细的 Javadoc API 文档，帮助你快速上手 mono4j 等工具库。</p>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 StArray. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 根据时间自动切换主题
+        function setThemeByTime() {
+            const hour = new Date().getHours();
+            const isDarkTime = hour >= 18 || hour < 6; // 18:00-06:00 为夜间
+            
+            if (isDarkTime) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        // 页面加载时设置主题
+        setThemeByTime();
+        
+        // 每分钟检查一次时间，自动切换主题
+        setInterval(setThemeByTime, 60000);
+
+        // 创建粒子效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) {
+                console.error('Particles container not found');
+                return;
+            }
+            
+            const particleCount = 80;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+            
+            console.log(`Created ${particleCount} particles`);
+        }
+
+        // 鼠标轨迹效果
+        document.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.className = 'mouse-trail';
+            trail.style.left = e.clientX - 3 + 'px';
+            trail.style.top = e.clientY - 3 + 'px';
+            document.body.appendChild(trail);
+
+            setTimeout(() => {
+                if (trail.parentNode) {
+                    trail.parentNode.removeChild(trail);
+                }
+            }, 500);
+        });
+
+        // 点击涟漪效果
+        document.addEventListener('click', (e) => {
+            const ripple = document.createElement('div');
+            ripple.className = 'click-ripple';
+            // 使用 transform 来居中，而不是偏移 left/top
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(ripple);
+
+            setTimeout(() => {
+                if (ripple.parentNode) {
+                    ripple.parentNode.removeChild(ripple);
+                }
+            }, 600);
+        });
+
+        // 初始化粒子
+        createParticles();
+    </script>
+</body>
+</html>
